@@ -1,4 +1,5 @@
-const Rake = require('./index');
+const Rake = require('./rake');
+const NodeRakeV2 = require('./rake-v2').NodeRakeV2;
 const path = require('path');
 const fs = require('fs');
 const utils = require('./utils').Utils;
@@ -29,4 +30,6 @@ module.exports = {
       defaultStopWords = defaultStopWords.concat(stopwords);
     }
   },
+
+  NodeRakeV2
 };
