@@ -3,6 +3,9 @@
 A NodeJS implementation of the Rapid Automatic Keyword Extraction algorithm.
 
 Note: New version of existing NPM - https://www.npmjs.com/package/node-rake
+- New version `node-rake-v2` has some below fixes, improvements and some new features. - 
+  - https://github.com/waseem18/node-rake/issues/26
+  - https://github.com/waseem18/node-rake/issues/24
 
 # Installation
 `npm install node-rake-v2`
@@ -16,6 +19,8 @@ rake.generate(text, options);
 The `options` param is an object that allows to pass custom params to generate method. Options:
 
 - `stopwords`: Optional. An `array` containing a custom stopwords list. By default, the method uses a stopwords list which comes along (take a look at [Stopwords source](#stopwords-source)).
+
+- `removeDuplicates`: Optional. A `flag` to remove duplicate values. By default, the method return duplicate keywords but if this flag is true then it will remove duplicate values and return keywords in lowercase.
 
 ```javascript
 rake.addStopWords(stopwords);

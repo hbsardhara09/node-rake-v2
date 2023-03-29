@@ -11,14 +11,18 @@ module.exports = {
   /**
    * Function to generate keywords list
    * @param {string} content - Content String
-   * @param {JSON} opts - Options - { stopwords }
+   * @param {JSON} options - Options - { stopwords }
    * @returns {[string]} - Array of keywords
    */
-  generate(content, opts = {}) {
-    const stopwordsList = opts.stopwords || defaultStopWords;
+  generate(content, options = {}) {
+    const stopwordsList = options.stopwords || defaultStopWords;
 
     const instance = new Rake(content, stopwordsList);
-    return instance.generate();
+    let keywords = instance.generate();
+    if (options.removeDuplicates) {
+      keywords = utils.removeDuplicates(keywords);
+    }
+    return keywords;
   },
 
   /**

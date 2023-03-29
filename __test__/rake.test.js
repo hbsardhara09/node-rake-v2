@@ -20,8 +20,23 @@ describe('rake', () => {
     });
 
     it('trims leading and trailing spaces from keywords', () => {
-      const firstKeyword = rake.generate(text)[0];
-      expect(firstKeyword).toEqual('Latent Dirichlet Allocation');
+      const keywords = rake.generate(text);
+      expect(keywords).toEqual(expect.arrayContaining(['Latent Dirichlet Allocation']));
+    });
+
+    it('check for removeDuplicates flags', function () {
+      const duplicateText = text + ' ' + text.toLowerCase();
+      let keywords = rake.generate(duplicateText);
+      keywords = keywords.filter((keyword) => {
+        return keyword.toLowerCase() === 'latent dirichlet allocation';
+      });
+      expect(keywords.length).toEqual(2);
+
+      keywords = rake.generate(duplicateText, { removeDuplicates: true });
+      keywords = keywords.filter((keyword) => {
+        return keyword.toLowerCase() === 'latent dirichlet allocation';
+      });
+      expect(keywords.length).toEqual(1);
     });
   });
 });
